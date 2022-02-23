@@ -1,0 +1,44 @@
+version: datasets/v0.2
+source: tap-shopify
+title: Order Value Last 30 Days
+questions: Whats the total daily order value for the last 30 days?
+description: |-
+  Daily total order value is calculate by summing 'total_price' for the 'created_at' date.
+
+  #shopify
+metadata: |-
+  {
+    "name": "orders",
+    "label": "Order Value Last 30 Days", 
+    "related_table": {
+      "columns": [
+        {"name": "date", "label": "Date", "description": "Date"}
+      ],
+      "aggregates": [
+        {"name": "sum_total_price", "label": "Total", "description": "Total"}
+      ]
+    }
+  }
+visualisation: |-
+  {"chartjs-chart": 
+    {"chartType": "line", 
+      "options": {
+        "scales": {
+          "yAxes": [{
+            "ticks": {
+              "beginAtZero": true,
+              "stepSize": 1
+            }
+          }]
+        }
+      }
+    }
+  }
+query: |-
+  SELECT
+    date "orders.created_at"
+    , SUM(total_price) "orders.sum_total_price"
+  FROM orders
+  WHERE created_at >= current_date - interval '30 day'
+  GROUP BY created_at
+  ORDER BY created_at DESC
