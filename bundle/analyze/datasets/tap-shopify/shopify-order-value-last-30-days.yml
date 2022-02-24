@@ -36,9 +36,9 @@ visualisation: |-
   }
 query: |-
   SELECT
-    date "orders.created_at"
-    , SUM(total_price) "orders.sum_total_price"
+    to_timestamp(created_at, 'YYYY-MM-DDTHH:MI:SS')::date "orders.created_at"
+    , SUM(total_price::DECIMAL) "orders.sum_total_price"
   FROM orders
-  WHERE created_at >= current_date - interval '30 day'
-  GROUP BY created_at
-  ORDER BY created_at DESC
+  WHERE to_timestamp(created_at, 'YYYY-MM-DDTHH:MI:SS')::date >= current_date - interval '30 day'
+  GROUP BY to_timestamp(created_at, 'YYYY-MM-DDTHH:MI:SS')::date
+  ORDER BY to_timestamp(created_at, 'YYYY-MM-DDTHH:MI:SS')::date DESC

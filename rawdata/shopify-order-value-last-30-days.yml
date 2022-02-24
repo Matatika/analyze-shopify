@@ -1,4 +1,6 @@
 shopify-order-value-last-30-days: |-
   [{"orders.date": "21/01/2022", "orders.sum_total_price": 1207.05},
-  {"orders.date": "22/01/2022", "orders.sum_total_price": 1207.05},
-  {"orders.date": "23/01/2022", "orders.sum_total_price": 1207.05}]
+   {"orders.date": "22/01/2022", "orders.sum_total_price": 693},
+   {"orders.date": "23/01/2022", "orders.sum_total_price": 297},
+   {"orders.date": "24/01/2022", "orders.sum_total_price": 820.35}
+  ]
